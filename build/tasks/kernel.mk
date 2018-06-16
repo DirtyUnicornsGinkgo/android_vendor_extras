@@ -68,7 +68,7 @@
 #                                          modules in system instead of vendor
 #   NEED_KERNEL_MODULE_VENDOR_OVERLAY  = Optional, if true, install kernel
 #                                          modules in vendor_overlay instead of vendor
-
+#   TARGET_KERNEL_ADDITIONAL_FLAGS     = Additional make flags, optional
 
 ifneq ($(TARGET_NO_KERNEL),true)
 
@@ -281,6 +281,10 @@ endif
 
 ifneq ($(TARGET_KERNEL_MODULES),)
     $(error TARGET_KERNEL_MODULES is no longer supported!)
+endif
+
+ifneq ($(TARGET_KERNEL_ADDITIONAL_FLAGS),)
+  KERNEL_MAKE_FLAGS += $(TARGET_KERNEL_ADDITIONAL_FLAGS)
 endif
 
 KERNEL_MAKE_FLAGS += DTC=$(KERNEL_BUILD_OUT_PREFIX)$(DTC)
